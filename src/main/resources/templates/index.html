@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 Tracker</title>
+</head>
+<body>
+<div align="center">
+    <h1>COVID - 19 TRACKER</h1>
+</div>
+<div th:if="${countryList}!=null">
+    <div align="center">
+        <div style="color: blue;">
+            <span>TOTAL_CONFIRMED</span>
+            <span th:text="${TOTAL_CONFIRMED}"></span>
+        </div>
+        <div style="color: red">
+            <span>TOTAL_DEATHS</span>
+            <span th:text="${TOTAL_DEATHS}"></span>
+        </div>
+        <div style="color: green;">
+            <span>TOTAL_RECOVERED</span>
+            <span th:text="${TOTAL_RECOVERED}"></span>
+        </div>
+    </div>
+    <div align="center">
+        <table>
+            <tr>
+                <th>Country</th>
+                <th>TotalConfirmed</th>
+                <th>TotalDeaths</th>
+                <th>TotalRecovered</th>
+            </tr>
+            <tr th:each="country : ${countryList}">
+                <td th:text="${country.country}"></td>
+                <td th:text="${country.totalConfirmed}"></td>
+                <td th:text="${country.totalDeaths}"></td>
+                <td th:text="${country.totalRecovered}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div th:unless="${countryList}!=null">
+    <h4 align="center" th:text="${error}" style="color: red;"></h4>
+</div>
+
+
+</body>
+</html>
