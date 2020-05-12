@@ -1,5 +1,6 @@
 package org.roy.covid19tracker.utility;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.roy.covid19tracker.model.Country;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +13,12 @@ import java.util.Scanner;
 @Service
 public class Covid19Data {
 
-    public static final String URL = "https://api.covid19api.com/summary";
-    public static StringBuilder data = new StringBuilder();
+    public static final String URL = "https://corona.lmao.ninja/v2/countries?yesterday&sort";
 
     private final JsonParser jsonParser = new JsonParser();
 
-    public List<Country> fetchData() {
+    public List<Country> fetchData() throws JsonProcessingException {
+        String convertedData = "";
         try {
             URL url = new URL(URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -26,16 +27,13 @@ public class Covid19Data {
 
             int responseCode = connection.getResponseCode();
             if (responseCode != 200) {
-                if (responseCode == 429) {
-                    return null;
-                }
                 return null;
             }
-            data.append(convertData(url));
+            convertedData = convertData(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return jsonParser.getCountryData(data.toString());
+        return jsonParser.getCountryData(convertedData);
     }
 
     private String convertData(URL url) throws IOException {
@@ -46,5 +44,19 @@ public class Covid19Data {
         }
         sc.close();
         return sb.toString();
+    }
+
+    public long getTotal(String col, List<Country> countryList) {
+        long total = 0;
+        for (Country country : countryList) {
+            if (col.equalsIgnoreCase("cases")) {
+                total += country.getCases();
+            } else if (col.equalsIgnoreCase("deaths")) {
+                total += country.getDeaths();
+            } else if (col.equalsIgnoreCase("recovered")) {
+                total += country.getRecovered();
+            }
+        }
+        return total;
     }
 }
