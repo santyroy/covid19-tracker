@@ -3,7 +3,6 @@ package org.roy.covid19tracker.utility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.roy.covid19tracker.model.Country;
 
 import java.util.ArrayList;
