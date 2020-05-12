@@ -26,16 +26,29 @@
     <div align="center">
         <table>
             <tr>
-                <th>Country</th>
-                <th>TotalConfirmed</th>
-                <th>TotalDeaths</th>
-                <th>TotalRecovered</th>
+                <th colspan="2">Country</th>
+                <th>Cases</th>
+                <th>Deaths</th>
+                <th>Recovered</th>
+                <th>Active</th>
+
+                <th>Today Cases</th>
+                <th>Today Deaths</th>
+                <th>Critical</th>
+                <th>Tests Done</th>
+
             </tr>
             <tr th:each="country : ${countryList}">
+                <td><img th:src="${country.countryInfo.flag}" height="25px" width="50px"></td>
                 <td th:text="${country.country}"></td>
-                <td th:text="${country.totalConfirmed}"></td>
-                <td th:text="${country.totalDeaths}"></td>
-                <td th:text="${country.totalRecovered}"></td>
+                <td th:text="${country.cases}"></td>
+                <td th:text="${country.deaths}"></td>
+                <td th:text="${country.recovered}"></td>
+                <td th:text="${country.active}"></td>
+                <td th:text="${country.todayCases}"></td>
+                <td th:text="${country.todayDeaths}"></td>
+                <td th:text="${country.critical}"></td>
+                <td th:text="${country.tests}"></td>
             </tr>
         </table>
     </div>

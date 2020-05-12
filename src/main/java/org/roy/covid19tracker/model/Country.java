@@ -1,143 +1,223 @@
 package org.roy.covid19tracker.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "Country",
-        "CountryCode",
-        "Slug",
-        "NewConfirmed",
-        "TotalConfirmed",
-        "NewDeaths",
-        "TotalDeaths",
-        "NewRecovered",
-        "TotalRecovered",
-        "Date"
+        "updated",
+        "country",
+        "countryInfo",
+        "cases",
+        "todayCases",
+        "deaths",
+        "todayDeaths",
+        "recovered",
+        "active",
+        "critical",
+        "casesPerOneMillion",
+        "deathsPerOneMillion",
+        "tests",
+        "testsPerOneMillion",
+        "continent"
 })
 public class Country {
 
-    @JsonProperty("Country")
+    @JsonProperty("updated")
+    private Long updated;
+    @JsonProperty("country")
     private String country;
-    @JsonProperty("CountryCode")
-    private String countryCode;
-    @JsonProperty("Slug")
-    private String slug;
-    @JsonProperty("NewConfirmed")
-    private Integer newConfirmed;
-    @JsonProperty("TotalConfirmed")
-    private Integer totalConfirmed;
-    @JsonProperty("NewDeaths")
-    private Integer newDeaths;
-    @JsonProperty("TotalDeaths")
-    private Integer totalDeaths;
-    @JsonProperty("NewRecovered")
-    private Integer newRecovered;
-    @JsonProperty("TotalRecovered")
-    private Integer totalRecovered;
-    @JsonProperty("Date")
-    private String date;
+    @JsonProperty("countryInfo")
+    private CountryInfo countryInfo;
+    @JsonProperty("cases")
+    private Integer cases;
+    @JsonProperty("todayCases")
+    private Integer todayCases;
+    @JsonProperty("deaths")
+    private Integer deaths;
+    @JsonProperty("todayDeaths")
+    private Integer todayDeaths;
+    @JsonProperty("recovered")
+    private Integer recovered;
+    @JsonProperty("active")
+    private Integer active;
+    @JsonProperty("critical")
+    private Integer critical;
+    @JsonProperty("casesPerOneMillion")
+    private Integer casesPerOneMillion;
+    @JsonProperty("deathsPerOneMillion")
+    private Integer deathsPerOneMillion;
+    @JsonProperty("tests")
+    private Integer tests;
+    @JsonProperty("testsPerOneMillion")
+    private Integer testsPerOneMillion;
+    @JsonProperty("continent")
+    private String continent;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("Country")
+    @JsonProperty("updated")
+    public Long getUpdated() {
+        return updated;
+    }
+
+    @JsonProperty("updated")
+    public void setUpdated(Long updated) {
+        this.updated = updated;
+    }
+
+    @JsonProperty("country")
     public String getCountry() {
         return country;
     }
 
-    @JsonProperty("Country")
+    @JsonProperty("country")
     public void setCountry(String country) {
         this.country = country;
     }
 
-    @JsonProperty("CountryCode")
-    public String getCountryCode() {
-        return countryCode;
+    @JsonProperty("countryInfo")
+    public CountryInfo getCountryInfo() {
+        return countryInfo;
     }
 
-    @JsonProperty("CountryCode")
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    @JsonProperty("countryInfo")
+    public void setCountryInfo(CountryInfo countryInfo) {
+        this.countryInfo = countryInfo;
     }
 
-    @JsonProperty("Slug")
-    public String getSlug() {
-        return slug;
+    @JsonProperty("cases")
+    public Integer getCases() {
+        return cases;
     }
 
-    @JsonProperty("Slug")
-    public void setSlug(String slug) {
-        this.slug = slug;
+    @JsonProperty("cases")
+    public void setCases(Integer cases) {
+        this.cases = cases;
     }
 
-    @JsonProperty("NewConfirmed")
-    public Integer getNewConfirmed() {
-        return newConfirmed;
+    @JsonProperty("todayCases")
+    public Integer getTodayCases() {
+        return todayCases;
     }
 
-    @JsonProperty("NewConfirmed")
-    public void setNewConfirmed(Integer newConfirmed) {
-        this.newConfirmed = newConfirmed;
+    @JsonProperty("todayCases")
+    public void setTodayCases(Integer todayCases) {
+        this.todayCases = todayCases;
     }
 
-    @JsonProperty("TotalConfirmed")
-    public Integer getTotalConfirmed() {
-        return totalConfirmed;
+    @JsonProperty("deaths")
+    public Integer getDeaths() {
+        return deaths;
     }
 
-    @JsonProperty("TotalConfirmed")
-    public void setTotalConfirmed(Integer totalConfirmed) {
-        this.totalConfirmed = totalConfirmed;
+    @JsonProperty("deaths")
+    public void setDeaths(Integer deaths) {
+        this.deaths = deaths;
     }
 
-    @JsonProperty("NewDeaths")
-    public Integer getNewDeaths() {
-        return newDeaths;
+    @JsonProperty("todayDeaths")
+    public Integer getTodayDeaths() {
+        return todayDeaths;
     }
 
-    @JsonProperty("NewDeaths")
-    public void setNewDeaths(Integer newDeaths) {
-        this.newDeaths = newDeaths;
+    @JsonProperty("todayDeaths")
+    public void setTodayDeaths(Integer todayDeaths) {
+        this.todayDeaths = todayDeaths;
     }
 
-    @JsonProperty("TotalDeaths")
-    public Integer getTotalDeaths() {
-        return totalDeaths;
+    @JsonProperty("recovered")
+    public Integer getRecovered() {
+        return recovered;
     }
 
-    @JsonProperty("TotalDeaths")
-    public void setTotalDeaths(Integer totalDeaths) {
-        this.totalDeaths = totalDeaths;
+    @JsonProperty("recovered")
+    public void setRecovered(Integer recovered) {
+        this.recovered = recovered;
     }
 
-    @JsonProperty("NewRecovered")
-    public Integer getNewRecovered() {
-        return newRecovered;
+    @JsonProperty("active")
+    public Integer getActive() {
+        return active;
     }
 
-    @JsonProperty("NewRecovered")
-    public void setNewRecovered(Integer newRecovered) {
-        this.newRecovered = newRecovered;
+    @JsonProperty("active")
+    public void setActive(Integer active) {
+        this.active = active;
     }
 
-    @JsonProperty("TotalRecovered")
-    public Integer getTotalRecovered() {
-        return totalRecovered;
+    @JsonProperty("critical")
+    public Integer getCritical() {
+        return critical;
     }
 
-    @JsonProperty("TotalRecovered")
-    public void setTotalRecovered(Integer totalRecovered) {
-        this.totalRecovered = totalRecovered;
+    @JsonProperty("critical")
+    public void setCritical(Integer critical) {
+        this.critical = critical;
     }
 
-    @JsonProperty("Date")
-    public String getDate() {
-        return date;
+    @JsonProperty("casesPerOneMillion")
+    public Integer getCasesPerOneMillion() {
+        return casesPerOneMillion;
     }
 
-    @JsonProperty("Date")
-    public void setDate(String date) {
-        this.date = date;
+    @JsonProperty("casesPerOneMillion")
+    public void setCasesPerOneMillion(Integer casesPerOneMillion) {
+        this.casesPerOneMillion = casesPerOneMillion;
+    }
+
+    @JsonProperty("deathsPerOneMillion")
+    public Integer getDeathsPerOneMillion() {
+        return deathsPerOneMillion;
+    }
+
+    @JsonProperty("deathsPerOneMillion")
+    public void setDeathsPerOneMillion(Integer deathsPerOneMillion) {
+        this.deathsPerOneMillion = deathsPerOneMillion;
+    }
+
+    @JsonProperty("tests")
+    public Integer getTests() {
+        return tests;
+    }
+
+    @JsonProperty("tests")
+    public void setTests(Integer tests) {
+        this.tests = tests;
+    }
+
+    @JsonProperty("testsPerOneMillion")
+    public Integer getTestsPerOneMillion() {
+        return testsPerOneMillion;
+    }
+
+    @JsonProperty("testsPerOneMillion")
+    public void setTestsPerOneMillion(Integer testsPerOneMillion) {
+        this.testsPerOneMillion = testsPerOneMillion;
+    }
+
+    @JsonProperty("continent")
+    public String getContinent() {
+        return continent;
+    }
+
+    @JsonProperty("continent")
+    public void setContinent(String continent) {
+        this.continent = continent;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }
+

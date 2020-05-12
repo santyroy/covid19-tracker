@@ -1,8 +1,8 @@
 package org.roy.covid19tracker.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.roy.covid19tracker.model.Country;
 import org.roy.covid19tracker.utility.Covid19Data;
-import org.roy.covid19tracker.utility.GlobalData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +23,19 @@ public class ViewController {
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        List<Country> countryList = covid19Data.fetchData();
+        List<Country> countryList = null;
+        try {
+            countryList = covid19Data.fetchData();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         if (countryList != null) {
             sort(countryList);
             log.info("Fetch Data complete...");
             model.addAttribute("countryList", countryList);
-            model.addAttribute("NEW_CONFIRMED", GlobalData.NEW_CONFIRMED);
-            model.addAttribute("TOTAL_CONFIRMED", GlobalData.TOTAL_CONFIRMED);
-            model.addAttribute("NEW_DEATHS", GlobalData.NEW_DEATHS);
-            model.addAttribute("TOTAL_DEATHS", GlobalData.TOTAL_DEATHS);
-            model.addAttribute("NEW_RECOVERED", GlobalData.NEW_RECOVERED);
-            model.addAttribute("TOTAL_RECOVERED", GlobalData.TOTAL_RECOVERED);
+            model.addAttribute("TOTAL_CONFIRMED", covid19Data.getTotal("cases", countryList));
+            model.addAttribute("TOTAL_DEATHS", covid19Data.getTotal("deaths", countryList));
+            model.addAttribute("TOTAL_RECOVERED", covid19Data.getTotal("recovered", countryList));
         } else {
             model.addAttribute("error", "Server Busy! Please try after sometime");
         }
@@ -41,6 +43,6 @@ public class ViewController {
     }
 
     private void sort(List<Country> countryList) {
-        countryList.sort(Comparator.comparing(Country::getTotalConfirmed).reversed());
+        countryList.sort(Comparator.comparing(Country::getCases).reversed());
     }
 }
