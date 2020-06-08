@@ -3,6 +3,7 @@ package org.roy.covid19tracker.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.roy.covid19tracker.model.Country;
 import org.roy.covid19tracker.utility.Covid19Data;
+import org.roy.covid19tracker.utility.GlobalData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,13 @@ public class ViewController {
     @GetMapping("/")
     public String showHomePage(Model model) {
         List<Country> countryList = null;
-        try {
-            countryList = covid19Data.fetchData();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            countryList = covid19Data.fetchData();
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+
+        countryList = GlobalData.countries;
         if (countryList != null) {
             sort(countryList);
             log.info("Fetch Data complete...");
@@ -43,6 +46,8 @@ public class ViewController {
     }
 
     private void sort(List<Country> countryList) {
+        System.out.println("START TIME: " + (System.currentTimeMillis()/60000));
         countryList.sort(Comparator.comparing(Country::getCases).reversed());
+        System.out.println("END TIME: " + (System.currentTimeMillis()/60000));
     }
 }
